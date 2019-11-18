@@ -11,10 +11,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.entity.ByteArrayEntity;
-<<<<<<< HEAD
-=======
-import cz.msebera.android.httpclient.entity.StringEntity;
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
 
@@ -29,21 +25,11 @@ public class HttpConnectionManager {
     private static HttpConnectionManager instance;
 
     public static HttpConnectionManager getInstance() {
-<<<<<<< HEAD
         if (instance == null)
             instance = new HttpConnectionManager();
         return instance;
     }
 
-=======
-        if (instance == null) {
-            instance = new HttpConnectionManager();
-        }
-        return instance;
-    }
-
-
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     /**
      * 로그인을 시도하는 메소드
      * 받아온 파라미터를 json에 담아서 서버로 보낸다. (키 값을 반드시 통일화시킬 것)
@@ -54,22 +40,14 @@ public class HttpConnectionManager {
      * @throws UnsupportedEncodingException
      */
     public void login(String CID, String CPassword, JsonHttpResponseHandler responseHandler) throws JSONException, UnsupportedEncodingException {
-<<<<<<< HEAD
         String url = baseURL + "/login";// "http://10.1.188.54:3000/login" or  "http://192.168.43.144:3000/";
-=======
-        String url = baseURL + "/login";// "http://10.1.188.54:3000/login"
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
         JSONObject jsonParams = new JSONObject();
         //json형태로 데이터를 전환한다. 첫 파라미터엔 키 값, 두번째에 데이터가 들어간다. (키값이 같아야 함)
         jsonParams.put("CID", CID);
         jsonParams.put("CPassword", CPassword);
         //json에 들어간 데이터를 다시 stinrg으로 전환한다.
-<<<<<<< HEAD
         ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-=======
-        StringEntity entity = new StringEntity(jsonParams.toString());
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
         client.post(null, url, entity, "application/json", responseHandler);
     }
 
@@ -97,26 +75,16 @@ public class HttpConnectionManager {
             //StringEntity entity = new StringEntity(jsonParams.toString());
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-<<<<<<< HEAD
-=======
-            Log.d("Result", jsonParams.toString());
-
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
             client.post(null, url, entity, "application/json", responseHandler);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     /**
      * 미용사로 회원가입을 시도
      * CID ,CPassword, CName, CPhoneNum, license를 파라미터로 받아
      * 회원 테이블에 기본 정보를 저장하고
      * license는 CID와 함께 미용사 테이블에 저장됨
-<<<<<<< HEAD
      * @param CID
      * @param CPassword
      * @param CName
@@ -125,8 +93,6 @@ public class HttpConnectionManager {
      * @param responseHandler
      * @throws JSONException
      * @throws UnsupportedEncodingException
-=======
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
      */
     public void makeHairDresser(String CID, String CPassword, String CName, String CPhoneNum, String license, JsonHttpResponseHandler responseHandler)throws JSONException, UnsupportedEncodingException{
         String url = baseURL + "/makehairdresser"; // "http://10.1.188.54:3000/makehairdresser"
@@ -137,7 +103,6 @@ public class HttpConnectionManager {
             jsonParams.put("CName", CName);
             jsonParams.put("CPhoneNum", CPhoneNum);
             jsonParams.put("license", license);
-<<<<<<< HEAD
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, url, entity, "application/json", responseHandler);
@@ -170,8 +135,6 @@ public class HttpConnectionManager {
             jsonParams.put("CPhoneNum", CPhoneNum);
             jsonParams.put("mBusinessNum", mBusinessNum);
             jsonParams.put("license", license);
-=======
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
             Log.d("Result", jsonParams.toString());
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
@@ -194,19 +157,9 @@ public class HttpConnectionManager {
             JSONObject jsonParams = new JSONObject();
             jsonParams.put("CName", CName);
             jsonParams.put("CPhoneNum", CPhoneNum);
-<<<<<<< HEAD
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, url, entity, "application/json", responseHandler);
         }catch(Exception e){e.printStackTrace();}
     }
-=======
-            StringEntity entity = new StringEntity(jsonParams.toString());
-            Log.d("Result", jsonParams.toString());
-
-            client.post(null, url, entity, "application/json", responseHandler);
-        }catch(Exception e){e.printStackTrace();}
-    }
-
->>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
 }
