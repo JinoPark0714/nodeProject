@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FindAccount">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    성명     : "
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/FindAccount_IDFindName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="성명을 입력하세요."/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호 : "
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/FindAccount_IDFindPhoneNum"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="전화번호를 입력하세요."/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonFindID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID 찾기"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    성명     : "
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/FindAccount_PWFindName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="성명을 입력하세요."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="     I    D   : "
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/FindAccount_PWFindID"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="ID를 입력하세요."/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호 : "
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/FindAccount_PWFindPhoneNum"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="전화번호를 입력하세요."/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonFindPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PW 찾기"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+</LinearLayout>
