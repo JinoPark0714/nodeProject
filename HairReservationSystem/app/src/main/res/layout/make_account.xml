@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MakeAccount">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TabHost
+                android:id="@+id/selectClient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+<!--=====================손님 회원가입 레이아웃====================================-->
+                        <LinearLayout
+                            android:id="@+id/show1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+                                android:id="@+id/makeClient"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+                                    <!--성명 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="    성        명      :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCName"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+
+                                    <!--ID 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="       I     D       : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCID"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+
+
+                                    </LinearLayout>
+
+                                    <!--비밀번호 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비  밀  번  호    : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--비밀번호 확인 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비밀번호 확인 : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCheckCPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--전화번호 확인 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="전  화  번  호    :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCPhoneNum"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <!--회원가입 완료하는 공간-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="bottom|center">
+
+                                    <Button
+                                        android:id="@+id/completeClient"
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="가    입     완    료"
+                                        android:textSize="35dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+<!--======================손님 회원가입 레이아웃====================================-->
+
+
+<!--======================미용사 회원가입 레이아웃==================================-->
+                        <LinearLayout
+                            android:id="@+id/show2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <LinearLayout
+                                android:id="@+id/makeHairDresser"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+                                    <!--성명 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="    성        명      :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeHName"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+
+                                    <!--ID 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="       I     D         : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeHID"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--비밀번호 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비  밀  번  호    : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeHPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--비밀번호 확인 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비밀번호 확인 : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCheckHPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--전화번호 확인 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="전  화  번  호    :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeHPhoneNum"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--미용사 자격증번호 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="자 격 증 번 호    :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeLicense"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <!--회원가입 완료하는 공간-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="bottom|center">
+
+                                    <Button
+                                        android:id="@+id/completeHairDresser"
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="가    입     완    료"
+                                        android:textSize="35dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+<!--======================미용사 회원가입 레이아웃==================================-->
+
+
+<!--======================관리자 회원가입 레이아웃==================================-->
+                        <LinearLayout
+                            android:id="@+id/show3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/makeManager"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+                                    <!--성명 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="    성        명      :"
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeMName"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+
+                                    <!--ID 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="       I     D         : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeMID"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--비밀번호 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비  밀  번  호    : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeMPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+
+                                    <!--비밀번호 확인 입력하는 공간-->
+                                    <LinearLayout
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content">
+
+                                        <TextView
+                                            android:layout_width="135dp"
+                                            android:layout_height="wrap_content"
+                                            android:text="비밀번호 확인 : "
+                                            android:textColor="#000000"
+                                            android:textSize="20dp" />
+
+                                        <EditText
+                                            android:id="@+id/makeCheckMPassword"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:hint=""
+                                            android:textSize="20dp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                                <!--회원가입 완료하는 공간-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="bottom|center">
+
+                                    <Button
+                                        android:id="@+id/completeManager"
+                                        android:layout_width="350dp"
+                                        android:layout_height="wrap_content"
+                                        android:text="가    입     완    료"
+                                        android:textSize="35dp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+<!--======================사업자 회원가입 레이아웃==================================-->
+
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+            </TabHost>
+        </LinearLayout>
+
+
+
+</LinearLayout>
