@@ -43,7 +43,11 @@ public class Main extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * ID값을 세팅한다. (완료)
+=======
+     * ID값을 세팅한다.
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
      */
     void setVarID(){
         CID = (EditText)findViewById(R.id.CID);
@@ -68,7 +72,11 @@ public class Main extends AppCompatActivity {
 
 
     /**
+<<<<<<< HEAD
      * 클릭 시, 회원가입 화면으로 넘어간다. (*완료)
+=======
+     * 클릭 시, 회원가입 화면으로 넘어간다.
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
      */
     void onClickMakeAccount(){
         btnMakeAccount.setOnClickListener(new View.OnClickListener(){
@@ -81,7 +89,11 @@ public class Main extends AppCompatActivity {
     }
 
     /**
+<<<<<<< HEAD
      * 버튼을 누를 시, 로그인을 시도한다. (완료)
+=======
+     * 버튼을 누를 시, 로그인을 시도한다.
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
      */
     void onClickLogin(){
         btnLogin.setOnClickListener(new View.OnClickListener() {

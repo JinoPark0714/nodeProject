@@ -43,11 +43,20 @@ router.post('/login', (req, res) => {
         WHERE (CID = ? AND CPassword = ?)`;
         conn.query(query, [myRequest.CID, myRequest.CPassword], (err, row) => {
             if (err) throw err;
+<<<<<<< HEAD
             if (row.length !== 0) { //로그인 성공
                 result["success"] = 1;
                 result["Grade"] = row[0].Grade;
                 res.send(result);
             } else { //로그인 실패
+=======
+
+            if (row.length !== 0) {
+                result["success"] = 1;
+                result["Grade"] = row[0].Grade;
+                res.send(result);
+            } else {
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
                 result["success"] = 0;
                 result["err"] = "incorrect ID or Password"; //오류가 발생한 원인을 알려주는 용도
                 res.send(result);
@@ -68,6 +77,7 @@ router.post('/makeaccount', (req, res) => {
     var myRequest = req.body;
     pool.getConnection((err, conn) => {
         if (err) throw err;
+<<<<<<< HEAD
         const reqCondition = ( (myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
         if (reqCondition) { //값을 제대로 입력하였을 때
             /**
@@ -96,6 +106,28 @@ router.post('/makeaccount', (req, res) => {
         else{
             console.log("이런! 실패했어요");
         }
+=======
+        if (myRequest.length !== 0) { //예외처리 확인
+            const duplicate = `INSERT INTO HAIRCLIENT VALUES('`
+                + myRequest.CID + `','`
+                + myRequest.CPassword + `','`
+                + myRequest.CName + `','`
+                + myRequest.CPhoneNum + `',0)`;
+            conn.query(duplicate, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 0], (err, row) => {
+                console.log(req.body);
+                if (err) {
+                    console.log("이런... 오류가 있어요");
+                    res.send(myRequest);
+                }
+                else if (row.length !== 0) {
+                    console.log("중복이 안되네? 회원가입 가능해!");
+                }
+                else if (row.length === 0) {
+                    console.log("앗... 또 다른 오류가 있어요");
+                }
+            })
+        }
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     });
 });
 
@@ -105,10 +137,15 @@ router.post('/makeaccount', (req, res) => {
  * 미용사가 회원가입 시, CID, CPassword, CName, CPhoneNum, Grade값이 DB에 등록된다.
  * 미용사는 미용사 정보가 따로 있으므로 query문을 한번 더 쓴다.
  * 제대로 들어오는지 확인하기 위해서는 length !== 0으로 확인을 한다.
+<<<<<<< HEAD
+=======
+ * 
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
  */
 router.post('/makehairdresser', (req, res) => {
     var myRequest = req.body;
     pool.getConnection((err, conn) => {
+<<<<<<< HEAD
         if (err) throw err;
         const reqCondition = ( (myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined) && (myRequest.license !== undefined));
         if (reqCondition) { //값을 제대로 입력하였을 때
@@ -195,6 +232,49 @@ router.post('/makemanager', (req, res)=>{
         }
     });
 });
+=======
+        if (err)
+            console.log("으흠! 문제가 있어요!");
+        else if (myRequest.length !== 0) { //예외처리 확인
+            const duplicate = `INSERT INTO HAIRCLIENT VALUES('`
+                + myRequest.CID + `','`
+                + myRequest.CPassword + `','`
+                + myRequest.CName + `','`
+                + myRequest.CPhoneNum + `', 1)`;
+
+            const insertHairInfo = `INSERT INTO Hairdresserinfo values('` + myRequest.license + `','` + myRequest.CID + `')`;
+            conn.query(duplicate, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row) => {
+                console.log(req.body);
+                if (err)
+                    console.log("makeHairdresser : 앗! 오류가 있어요 err");
+                else if (row.length !== 0) {
+                    console.log("");
+                    res.send(myRequest);
+                }
+                else if (row.length === 0){
+                    console.log("makeHairdresser : 앗! 오류가 있어요! row.length")
+                    //res.send(myRequest);
+                }
+                else{
+                    console.log("makeHairdresser : 중복이 안되네? 회원가입 가능해!");
+                    
+                }
+            });
+            conn.query(insertHairInfo, [myRequest.license, myRequest.CID], (err, row) => {
+                if (err)
+                    console.log("앗! 오류가 있어요 err");
+                else if (row.length !== 0) {
+                    console.log('Result : ' + myRequest.license + '   ' + myRequest.CID);
+
+                }
+                else { }
+            });
+        }
+
+    })
+})
+
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
 
 
 /**

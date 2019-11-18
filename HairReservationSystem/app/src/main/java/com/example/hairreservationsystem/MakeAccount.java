@@ -21,8 +21,13 @@ import cz.msebera.android.httpclient.Header;
 
 public class MakeAccount extends AppCompatActivity {
     private HttpConnectionManager hcManager;
+<<<<<<< HEAD
     private EditText CID, CPassword, checkCPassword, CName, CPhoneNum_1, CPhoneNum_2, CPhoneNum_3;
     private EditText license, mBusinessNum;
+=======
+    private EditText CID, CPassword, checkCPassword, CName, CPhoneNum;
+    private EditText license;
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     private Button btnMakeClient, btnMakeDresser, btnMakeManager;
     private TabHost tabHost;
     private TabHost.TabSpec ts1, ts2, ts3;
@@ -36,6 +41,10 @@ public class MakeAccount extends AppCompatActivity {
         onClickMakeHairDresser();
         onClickMakeManager();
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     void setID(){
         btnMakeClient = (Button)findViewById(R.id.completeClient);
         btnMakeDresser = (Button)findViewById(R.id.completeHairDresser);
@@ -48,6 +57,7 @@ public class MakeAccount extends AppCompatActivity {
         btnMakeManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 CID = (EditText)findViewById(R.id.makeMID);
                 CPassword = (EditText)findViewById(R.id.makeMPassword);
                 CName = (EditText)findViewById(R.id.makeMName);
@@ -94,20 +104,31 @@ public class MakeAccount extends AppCompatActivity {
                     catch(UnsupportedEncodingException e){e.printStackTrace();}
                 }else
                     Log.d("Error", "비밀번호 확인이 필요합니다.");
+=======
+
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
             }
         });
     }
 
     /**
+<<<<<<< HEAD
      * 미용사 CID, CPassword, CName, CPhoneNum, HairDresserLicenseNum (완료)
      */
     void onClickMakeHairDresser(){
         btnMakeDresser.setOnClickListener(new View.OnClickListener(){
+=======
+     * 미용사 CID, CPassword, CName, CPhoneNum, HairDresserLicenseNum
+     */
+    void onClickMakeHairDresser(){
+        btnMakeDresser.setOnClickListener(new View.OnClickListener() {
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
             @Override
             public void onClick(View v) {
                 CID = (EditText)findViewById(R.id.makeHID);
                 CPassword = (EditText)findViewById(R.id.makeHPassword);
                 CName = (EditText)findViewById(R.id.makeHName);
+<<<<<<< HEAD
                 CPhoneNum_1 = (EditText)findViewById(R.id.makeHPhoneNum_1);
                 CPhoneNum_2 = (EditText)findViewById(R.id.makeHPhoneNum_2);
                 CPhoneNum_3 = (EditText)findViewById(R.id.makeHPhoneNum_3);
@@ -139,6 +160,32 @@ public class MakeAccount extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
                                     else
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
+=======
+                CPhoneNum = (EditText)findViewById(R.id.makeHPhoneNum);
+                checkCPassword = (EditText)findViewById(R.id.makeCheckHPassword);
+                license = (EditText)findViewById(R.id.makeLicense);
+
+                final String myID = CID.getText().toString();
+                final String myPassword = CPassword.getText().toString();
+                final String myName = CName.getText().toString();
+                final String myPhoneNum = CPhoneNum.getText().toString();
+                final String checkPassword = checkCPassword.getText().toString();
+                final String myLicense = license.getText().toString();
+
+                if(myPassword.equals(checkPassword)){
+                    Log.d("Success", "비밀번호 확인 통과");
+                    hcManager = HttpConnectionManager.getInstance(); //싱글톤
+                    try{
+                        hcManager.makeHairDresser(myID, myPassword, myName, myPhoneNum, myLicense, new JsonHttpResponseHandler(){
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                Log.d("R ", "응답이 잘 받아와집니까?");
+                                try{
+                                    if(response.getString("CID").equals(myID)){
+                                        Toast.makeText(getApplicationContext(), "이미 존재하는 ID입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    Toast.makeText(getApplicationContext(), "CName : " + response.getString("CName"), Toast.LENGTH_SHORT).show();
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
                                 }
                                 catch(JSONException e){e.printStackTrace();}
                                 super.onSuccess(statusCode, headers, response);
@@ -149,17 +196,30 @@ public class MakeAccount extends AppCompatActivity {
                                 super.onFailure(statusCode, headers, throwable, errorResponse);
                             }
                         });
+<<<<<<< HEAD
                     }
                     catch(JSONException e){e.printStackTrace();}
                     catch(UnsupportedEncodingException e){e.printStackTrace();}
                 }else
                     Log.d("Error", "비밀번호 확인이 필요합니다.");
+=======
+                    }catch(JSONException e){e.printStackTrace();}
+                    catch(UnsupportedEncodingException e){e.printStackTrace();}
+                }
+                else{
+                    Log.d("Failure", "비밀번호 확인이 필요합니다.");
+                }
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
             }
         });
     }
 
     /**
+<<<<<<< HEAD
      * 일반회원 CID, CPassword, CName, CPhoneNum (완료)
+=======
+     * 일반회원 CID, CPassword, CName, CPhoneNum
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
      */
     void onClickMakeClient(){
         btnMakeClient.setOnClickListener(new View.OnClickListener(){
@@ -168,9 +228,13 @@ public class MakeAccount extends AppCompatActivity {
                 CID = (EditText)findViewById(R.id.makeCID);
                 CPassword = (EditText)findViewById(R.id.makeCPassword);
                 CName = (EditText)findViewById(R.id.makeCName);
+<<<<<<< HEAD
                 CPhoneNum_1 = (EditText)findViewById(R.id.makeCPhoneNum_1);
                 CPhoneNum_2 = (EditText)findViewById(R.id.makeCPhoneNum_2);
                 CPhoneNum_3 = (EditText)findViewById(R.id.makeCPhoneNum_3);
+=======
+                CPhoneNum = (EditText)findViewById(R.id.makeCPhoneNum);
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
                 checkCPassword = (EditText)findViewById(R.id.makeCheckCPassword);
                 /*
                 * 조건을 확인하기 위한 순서
@@ -181,9 +245,15 @@ public class MakeAccount extends AppCompatActivity {
                 final String myID = CID.getText().toString();
                 final String myPassword = CPassword.getText().toString();
                 final String myName = CName.getText().toString();
+<<<<<<< HEAD
                 final String myPhoneNum = CPhoneNum_1.getText().toString() + '-' + CPhoneNum_2.getText().toString() + '-' + CPhoneNum_3.getText().toString();
                 final String checkPassword = checkCPassword.getText().toString();
                 Log.d("전번", myPhoneNum);
+=======
+                final String myPhoneNum = CPhoneNum.getText().toString();
+                final String checkPassword = checkCPassword.getText().toString();
+
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
                 if(myPassword.equals(checkPassword)){
                     //비밀번호 일치 여부 통화
                     Log.d("Success", "비밀번호 확인 통과");
@@ -192,6 +262,7 @@ public class MakeAccount extends AppCompatActivity {
                         hcManager.makeAccount(myID, myPassword, myName, myPhoneNum, new JsonHttpResponseHandler(){
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+<<<<<<< HEAD
                                 try{
                                     String resMsg = response.getString("result");
                                     if(resMsg != null)
@@ -202,12 +273,27 @@ public class MakeAccount extends AppCompatActivity {
                                 catch(JSONException e){e.printStackTrace();}
                                 super.onSuccess(statusCode, headers, response);
                             }
+=======
+                                Log.d("R ", "응답이 잘 받아와집니까?");
+                                try{
+                                    if(response.getString("CID").equals(myID)){
+                                        Toast.makeText(getApplicationContext(), "이미 존재하는 ID입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    Toast.makeText(getApplicationContext(), "CName : " + response.getString("CName"), Toast.LENGTH_SHORT).show();
+                                }
+                                catch(JSONException e){e.printStackTrace();}
+
+                                super.onSuccess(statusCode, headers, response);
+                            }
+
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
                             @Override
                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                                 Log.d("F ", "응답에 실패했습니까?");
                                 super.onFailure(statusCode, headers, throwable, errorResponse);
                             }
                         });
+<<<<<<< HEAD
                     }
                     catch(JSONException e){e.printStackTrace();}
                     catch(UnsupportedEncodingException e){e.printStackTrace();}
@@ -217,6 +303,17 @@ public class MakeAccount extends AppCompatActivity {
         });
     }
 
+=======
+                    }catch(JSONException e){e.printStackTrace();}
+                    catch(UnsupportedEncodingException e){e.printStackTrace();}
+                }else{
+                    Log.d("Error", "비밀번호 확인이 필요합니다.");
+                }
+            }
+        });
+
+    }
+>>>>>>> 4dbfa9820c6c0c3500b8c3b50e81e3c2d2e65473
     /**
      * 탭호스트 정의
      */
