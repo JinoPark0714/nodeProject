@@ -1,5 +1,6 @@
 package com.example.hairreservationsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,8 +76,12 @@ public class MakeAccount extends AppCompatActivity {
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 try{
                                     String resMsg = response.getString("result");
-                                    if(resMsg != null)
+                                    if(resMsg != null){
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Main.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                     else
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
                                 }
@@ -135,8 +140,12 @@ public class MakeAccount extends AppCompatActivity {
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 try{
                                     String resMsg = response.getString("result");
-                                    if(resMsg != null)
+                                    if(resMsg != null){
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Main.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                     else
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
                                 }
@@ -194,8 +203,12 @@ public class MakeAccount extends AppCompatActivity {
                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                 try{
                                     String resMsg = response.getString("result");
-                                    if(resMsg != null)
+                                    if(resMsg != null){
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Main.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
                                     else
                                         Toast.makeText(getApplicationContext(), resMsg, Toast.LENGTH_SHORT).show();
                                 }

@@ -24,7 +24,7 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
             <EditText
-                android:id="@+id/FindAccount_IDFindName"
+                android:id="@+id/IDFindName"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="성명을 입력하세요."/>
@@ -40,10 +40,35 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
             <EditText
-                android:id="@+id/FindAccount_IDFindPhoneNum"
-                android:layout_width="250dp"
+                android:id="@+id/IDFindPhoneNum_1"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:hint="전화번호를 입력하세요."/>
+                android:textAlignment="center"
+                android:hint=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/IDFindPhoneNum_2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/IDFindPhoneNum_3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint=""/>
         </LinearLayout>
 
         <Button
@@ -71,7 +96,7 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
             <EditText
-                android:id="@+id/FindAccount_PWFindName"
+                android:id="@+id/PWFindName"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="성명을 입력하세요."/>
@@ -88,7 +113,7 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
             <EditText
-                android:id="@+id/FindAccount_PWFindID"
+                android:id="@+id/PWFindID"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="ID를 입력하세요."/>
@@ -105,10 +130,35 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
             <EditText
-                android:id="@+id/FindAccount_PWFindPhoneNum"
-                android:layout_width="250dp"
+                android:id="@+id/PWFindPhoneNum_1"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:hint="전화번호를 입력하세요."/>
+                android:textAlignment="center"
+                android:hint=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/PWFindPhoneNum_2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint=""/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
+            <EditText
+                android:id="@+id/PWFindPhoneNum_3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint=""/>
         </LinearLayout>
 
         <Button

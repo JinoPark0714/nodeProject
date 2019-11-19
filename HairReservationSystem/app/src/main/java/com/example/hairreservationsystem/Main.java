@@ -1,5 +1,6 @@
 package com.example.hairreservationsystem;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -89,7 +91,6 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 final String myID = CID.getText().toString(); //ID값을 string으로 전환
                 final String myPW = CPassword.getText().toString(); //PW값을 string으로 전환
-
                 try {
                     hcManager.getInstance().login(myID, myPW, new JsonHttpResponseHandler() {
                         /*
@@ -99,30 +100,48 @@ public class Main extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             try{
+                                AlertDialog.Builder dlg = new AlertDialog.Builder(Main.this);
                                 int success = response.getInt("success");
-
                                 if (success == 1) { //응답에 성공했습니까??
                                     int myGrade = response.getInt("Grade");
                                     Log.d("myGrade", String.valueOf(myGrade));
                                     Data.getInstance().setGrade(myGrade); //등급 값을 받아온다.
                                     /*등급 값에 따라 0 = 손님, 1 = 미용사, 2 = 관리자*/
                                     if(Data.getInstance().getGrade() == 0){//손님
-                                        Toast.makeText(getApplicationContext(), "손님 로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), ClientReservation.class);
-                                        startActivity(intent);
+                                        Log.d("확인", "손님 로그인");
+                                        dlg.setMessage("일반회원 화면으로 이동합니다.");
+                                        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(getApplicationContext(), ClientReservation.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
                                     }
                                     else if(Data.getInstance().getGrade() == 1){//미용사
-                                        Toast.makeText(getApplicationContext(), "미용사 로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), HairDresser.class);
-                                        startActivity(intent);
+                                        dlg.setMessage("미용사 화면으로 이동합니다.");
+                                        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(getApplicationContext(), HairDresser.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
                                     }
-
                                     else if(Data.getInstance().getGrade() == 2){ //관리자
-                                        Toast.makeText(getApplicationContext(), "관리자 로그인 성공", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), ManagerScreen.class);
-                                        startActivity(intent);
+                                        dlg.setMessage("관리자 화면으로 이동합니다.");
+                                        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(getApplicationContext(), ManagerScreen.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
                                     }
-
+                                    dlg.show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "로그인 실 패, 니계정 봉 쇄 !", Toast.LENGTH_LONG).show();
                                 }

@@ -60,7 +60,6 @@ public class HttpConnectionManager {
      * @param CName
      * @param CPhoneNum
      * @param responseHandler
-     *
      * @throws JSONException
      * @throws UnsupportedEncodingException
      */
@@ -80,6 +79,7 @@ public class HttpConnectionManager {
             e.printStackTrace();
         }
     }
+
     /**
      * 미용사로 회원가입을 시도
      * CID ,CPassword, CName, CPhoneNum, license를 파라미터로 받아
@@ -108,6 +108,7 @@ public class HttpConnectionManager {
             client.post(null, url, entity, "application/json", responseHandler);
         }catch(Exception e){e.printStackTrace();}
     }
+
     /**
      * 사업자 회원가입 메소드
      * CID, CPassword, CName, CPhoneNum, mBusinessNum, license를 파라미터로 받아
@@ -157,9 +158,34 @@ public class HttpConnectionManager {
             JSONObject jsonParams = new JSONObject();
             jsonParams.put("CName", CName);
             jsonParams.put("CPhoneNum", CPhoneNum);
+
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, url, entity, "application/json", responseHandler);
         }catch(Exception e){e.printStackTrace();}
+    }
+
+    /**
+     * PW찾기를 누를 시, DB 내에 있는 CID, CName ,CPhoneNum 값을 조회한다.
+     * 일치하면 DB 내에 있는 PW 값을 response로 넣어 클라이언트로 다시 던져준다. (이후 재설정으로 바꿔야 함)
+     * @param CID
+     * @param CName
+     * @param CPhoneNum
+     * @param responseHandler
+     * @throws JSONException
+     * @throws UnsupportedEncodingException
+     */
+    public void findPW(String CID, String CName, String CPhoneNum, JsonHttpResponseHandler responseHandler)throws JSONException, UnsupportedEncodingException{
+        String url = baseURL + "/findPW";
+        try{
+            JSONObject jsonParams = new JSONObject();
+            jsonParams.put("CID", CID);
+            jsonParams.put("CName", CName);
+            jsonParams.put("CPhoneNum", CPhoneNum);
+            ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
+            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            client.post(null, url, entity, "application/json", responseHandler);
+        }
+        catch(Exception e){e.printStackTrace();}
     }
 }

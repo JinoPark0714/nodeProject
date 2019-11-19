@@ -87,14 +87,14 @@ router.post('/makeaccount', (req, res) => {
                         + myRequest.CPhoneNum + `',0)`;
                     conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 0], (err, row)=>{
                         if(err) throw err;
-                        console.log('회원가입 완료!');
+                        console.log('일반손님 회원가입 완료!');
                     });  
                     res.send({"result" : "회원가입 성공"});
                 }
             })
         }
         else{
-            console.log("이런! 실패했어요");
+            console.log("이런! 실패했어요 makeAccount");
         }
     });
 });
@@ -131,7 +131,7 @@ router.post('/makehairdresser', (req, res) => {
                         + myRequest.CPhoneNum + `', 1)`;
                     conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row)=>{
                         if(err) throw err;
-                        console.log('회원가입 완료!');
+                        console.log('미용사 회원가입 완료!');
                     });
                     //미용사정보 (자격증번호, CID) 입력
                     const makeHairDresserInfo = `INSERT INTO HAIRDresserInfo VALUES('` 
@@ -139,14 +139,13 @@ router.post('/makehairdresser', (req, res) => {
                         + myRequest.CID + `')`;
                     conn.query(makeHairDresserInfo, [myRequest.license, myRequest.CID], (err, row) => {
                         if(err) throw err;
-                        console.log(row);
                     })
                     res.send({"result" : "회원가입 성공"});
                 }
             })
         }
         else{
-            console.log("이런! 실패했어요");
+            console.log("이런! 실패했어요 makeHairDresser");
         }
     });
 })
@@ -175,7 +174,7 @@ router.post('/makemanager', (req, res)=>{
                         + myRequest.CPhoneNum + `', 2)`;
                     conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row)=>{
                         if(err) throw err;
-                        console.log('회원가입 완료!');
+                        console.log('사업자 회원가입 완료!');
                     });
                     const makeManagerInfo = `INSERT INTO businessinfo VALUES('` 
                         + myRequest.mBusinessNum + `', '` 
@@ -184,42 +183,76 @@ router.post('/makemanager', (req, res)=>{
                     //사업자 번호 입력
                     conn.query(makeManagerInfo, [myRequest.mBusinessNum, myRequest.CID, myRequest.license], (err, row)=>{
                         if(err) throw err;
-                        console.log(row);
                     });
                     res.send({"result" : "회원가입 성공"});
                 }
             });
         }
         else{
-            console.log("이런! 실패했어요");
+            console.log("이런! 실패했어요 makeManager");
         }
     });
 });
 
 
 /**
- * ID 찾기를 누를 시, req에서 넘겨 들어온CName, CPhoneNum값과 DB에 있는 CName, CPhoneNum을 비교한다.
- * 2개의 값이 모두 일치하면 ID값을 받아오는 query문을 넣어 다시 결과값에 있는 ID
+ * 1. 받아온 CName, CPhoneNum값을 SELECT로 조회 시도
+ * 2. 결과가 나오면 CID 값을 response를 통해 클라로 던져준다.
  */
 router.post('/findid', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
-    const myRequest = req.body;
-
-    console.log("사람 이름이 안나와 : " + req.body.CName);
-    pool.getConnection((err, conn) => {
-        if (err) throw err;
-        const duplicate = `SELECT CID, CName, CPhoneNum FROM HairClient WHERE (CName = ?) AND (CPhoneNum = ?)`;
-        conn.query(duplicate, [myRequest.CName, myRequest.CPhoneNum], (err, row) => {
-            if (err) throw err;
-            if (row.length !== 0) {
-                console.log("중복이 있네? 이러면 회원가입 못해!");
-            }
-            else {
-                console.log("중복이 안되네? 회원가입 가능해!");
-                res.send(myRequest);
-            }
-        })
+    var myRequest = req.body;
+    pool.getConnection((err, conn)=>{
+        if(err) throw err;
+        const reqCondition = ((myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
+        if(reqCondition){ //값을 제대로 입력했을 때
+            const findID = `SELECT * FROM HairClient WHERE CName = ? AND CPhoneNum = ?`;
+            conn.query(findID, [myRequest.CName, myRequest.CPhoneNum], (err, row)=>{
+                if(row.length !== 0){
+                    /**
+                     * ID가 존재한다는 뜻
+                     */
+                    console.log('ID 찾기에 성공했습니다.');
+                    console.log(row[0].CID);
+                    res.send({"CID" : row[0].CID});
+                }
+                else{
+                    console.log('ID 찾기에 실패했습니다.');
+                    
+                }
+            })
+        }
+        else{
+            console.log("이런! 실패했어요 findid");
+        }
     });
+});
+
+/**
+ * 1. 받아온 CID, CName, CPhoneNum값을 SELECT로 조회
+ * 2. 결과가 나오면 PW 값을 response를 통해 클라로 던져준다. (이후 재설정 방식으로 변경해야 함)
+ */
+router.post('/findPW', (req, res)=>{
+    var myRequest = req.body;
+    pool.getConnection((err, conn)=>{
+        if(err) throw err;
+        const reqCondition = ((myRequest.CID !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
+        if(reqCondition){ //값을 제대로 입력했다면
+            const findPW = `SELECT * FROM HairClient WHERE CID = ? AND CName = ? AND CPhoneNum = ?`
+            conn.query(findPW, [myRequest.CID, myRequest.CName, myRequest.CPhoneNum], (err, row)=>{
+                if(row.length !== 0){
+                    console.log('PW 찾기에 성공했습니다.');
+                    res.send({"CPassword" : row[0].CPassword});
+                }
+                else
+                {
+                    console.log("실패했습니다.");
+                }
+            });
+        }
+        else{
+            console.log("이런! 실패했어요 findPW");
+        }
+    })
 });
 
 module.exports = router;
