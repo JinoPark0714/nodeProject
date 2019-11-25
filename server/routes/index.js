@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../config/dbConfig');
 
+var cookie = {
+    CID : "",
+    CPassword : ""
+};
 /* GET home page. */
 router.get('/', function (req, res, next) {
     /**
@@ -44,6 +48,8 @@ router.post('/login', (req, res) => {
         conn.query(query, [myRequest.CID, myRequest.CPassword], (err, row) => {
             if (err) throw err;
             if (row.length !== 0) { //로그인 성공
+                cookie.CID = row.CID;
+                cookie.CPassword = row.CPassword;
                 result["success"] = 1;
                 result["Grade"] = row[0].Grade;
                 res.send(result);
@@ -139,6 +145,7 @@ router.post('/makehairdresser', (req, res) => {
                         + myRequest.CID + `')`;
                     conn.query(makeHairDresserInfo, [myRequest.license, myRequest.CID], (err, row) => {
                         if(err) throw err;
+                        console.log('미용사 회원가입 완료!');
                     })
                     res.send({"result" : "회원가입 성공"});
                 }
@@ -254,5 +261,20 @@ router.post('/findPW', (req, res)=>{
         }
     })
 });
+
+/**
+ * 미용실 정보를 DB에 삽입한다.
+ * 1. 먼저 SELECT를 통해서 미용실 정보를 받아야 함
+ * (이는 로그인한 계정의 CID 값을 받아와야 한다.)
+ */
+router.post('/setHairRoomInfo', (req, res)=>{
+    var myRequest = req.body;
+    console.log(myRequest);
+    pool.getConnection((err, conn)=>{
+       if(err) throw err; 
+       const reqCondition = ((myRequest.hairRoomName !== undefined) && (myRequest.hairRoomCallNum !== undefined) && (myRequest.hairRoomAddress !== undefined) && (myRequest.hairRoomhairDresserNum !== undefined));
+       console.log(reqCondition);
+    });
+})
 
 module.exports = router;

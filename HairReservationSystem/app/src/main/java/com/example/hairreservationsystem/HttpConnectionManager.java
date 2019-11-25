@@ -188,4 +188,30 @@ public class HttpConnectionManager {
         }
         catch(Exception e){e.printStackTrace();}
     }
+
+
+    /**
+     * 미용실 정보를 DB에 넣는다.
+     * @param hairRoomName
+     * @param hairRoomCallNum
+     * @param hairRoomAddress
+     * @param hairRoomHairDresserNum
+     * @param responseHandler
+     * @throws JSONException
+     * @throws UnsupportedEncodingException
+     */
+    public void setHairRoomInfo(String hairRoomName, String hairRoomCallNum, String hairRoomAddress, String hairRoomHairDresserNum, JsonHttpResponseHandler responseHandler)throws JSONException, UnsupportedEncodingException{
+        String url = baseURL + "setHairRoomInfo";
+        try{
+            JSONObject jsonParams = new JSONObject();
+            jsonParams.put("hairRoomName", hairRoomName);
+            jsonParams.put("hairRoomCallNum", hairRoomCallNum);
+            jsonParams.put("hairRoomAddress", hairRoomAddress);
+            jsonParams.put("hairRoomhairDresserNum", hairRoomHairDresserNum);
+            ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
+            entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            client.post(null, url, entity, "application/json", responseHandler);
+        }
+        catch(Exception e ){e.printStackTrace();}
+    }
 }

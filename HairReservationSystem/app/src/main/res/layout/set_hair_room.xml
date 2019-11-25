@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SetHairRoom">
+
+    <!--미용실 이름 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="미용실 이름"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <EditText
+            android:id="@+id/setHairRoomName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="OOO미용실"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+    </LinearLayout>
+    <!--미용실 이름 입력-->
+    <!--미용실 전화번호 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="미용실 전화번호"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <EditText
+            android:id="@+id/setHairRoomCallNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="032-123-4567"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+    </LinearLayout>
+    <!--미용실 전화번호 입력-->
+    <!--미용실 주소 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="미용실 주소"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <EditText
+            android:id="@+id/setHairRoomAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="서울시 서초구"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+    </LinearLayout>
+    <!--미용실 주소 입력-->
+    <!--미용사 회원 수 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="미용사 회원 수"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <EditText
+            android:id="@+id/setHairRoomHairDresserNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="5"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="명"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+    </LinearLayout>
+    <!--미용사 회원 수 입력-->
+    <Button
+        android:id="@+id/setHairRoomInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료!"/>
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.hairreservationsystem;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         backPressCloseHandler = new BackPressCloseHandler(this); //2번 클릭 시 종료
         setVarID();
+        CPassword.setTransformationMethod(PasswordTransformationMethod.getInstance()); //
         onClickLogin();
         onClickMakeAccount();
         onClickFindAccount();
@@ -103,6 +105,8 @@ public class Main extends AppCompatActivity {
                                 AlertDialog.Builder dlg = new AlertDialog.Builder(Main.this);
                                 int success = response.getInt("success");
                                 if (success == 1) { //응답에 성공했습니까??
+                                    Data data = Data.getInstance();
+                                    data.setCID(myID);
                                     int myGrade = response.getInt("Grade");
                                     Log.d("myGrade", String.valueOf(myGrade));
                                     Data.getInstance().setGrade(myGrade); //등급 값을 받아온다.
@@ -143,12 +147,19 @@ public class Main extends AppCompatActivity {
                                     }
                                     dlg.show();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "로그인 실 패, 니계정 봉 쇄 !", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "로그인이 안돼요!", Toast.LENGTH_LONG).show();
                                 }
                             }
                             catch(JSONException e){e.printStackTrace();}
                         }
 
+                        /**
+                         * 응답에 실패했을 때
+                         * @param statusCode
+                         * @param headers
+                         * @param throwable
+                         * @param errorResponse
+                         */
                         @Override
                         public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                             Log.d("Fail", "Oops, response fail");

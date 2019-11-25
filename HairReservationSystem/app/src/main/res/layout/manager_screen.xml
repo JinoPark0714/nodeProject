@@ -4,15 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".ManagerScreen">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
-        <TextView
+        <Button
+            android:id="@+id/businessCalendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="관리자 화면입니다."
-            android:textSize="25dp"/>
+            android:text="일정 관리"/>
+        <Button
+            android:id="@+id/schedulePlaceBusiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스케줄"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/setPlaceBusiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사업장 설정"/>
     </LinearLayout>
 </LinearLayout>
