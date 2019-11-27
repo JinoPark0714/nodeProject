@@ -3,9 +3,21 @@ var router = express.Router();
 var pool = require('../config/dbConfig');
 
 var cookie = {
-    CID : "",
-    CPassword : ""
+    CID: "",
+    CPassword: ""
 };
+
+/**
+ * Table Info
+ * 
+ * 1.HairClient
+ * 2.ClientClass
+ * 3.HairDresserInfo
+ * 4.BusinessInfo
+ * 5.HairRoom
+ * 
+ * 
+ */
 /* GET home page. */
 router.get('/', function (req, res, next) {
     /**
@@ -74,32 +86,32 @@ router.post('/makeaccount', (req, res) => {
     var myRequest = req.body;
     pool.getConnection((err, conn) => {
         if (err) throw err;
-        const reqCondition = ( (myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
+        const reqCondition = ((myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
         if (reqCondition) { //값을 제대로 입력하였을 때
             /**
              * 값을 제대로 입력하였으면 IF문 내부가 실행이 된다. 당연하지 
              */
             const checkAccount = `SELECT * FROM HairClient WHERE CID = '` + myRequest.CID + `'`; //SELECT 문으로 CID 무결성 검사
-            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName,myRequest.CPhoneNum], (err, row) =>{
+            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum], (err, row) => {
                 console.log(row);
-                if(row.length !== 0)
-                    res.send({"result": "ID가 중복됩니다."})
-                else{
+                if (row.length !== 0)
+                    res.send({ "result": "ID가 중복됩니다." })
+                else {
                     console.log('회원가입 가능');
                     const makeAccount = `INSERT INTO HAIRCLIENT VALUES('`
                         + myRequest.CID + `','`
                         + myRequest.CPassword + `','`
                         + myRequest.CName + `','`
                         + myRequest.CPhoneNum + `',0)`;
-                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 0], (err, row)=>{
-                        if(err) throw err;
+                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 0], (err, row) => {
+                        if (err) throw err;
                         console.log('일반손님 회원가입 완료!');
-                    });  
-                    res.send({"result" : "회원가입 성공"});
+                    });
+                    res.send({ "result": "회원가입 성공" });
                 }
             })
         }
-        else{
+        else {
             console.log("이런! 실패했어요 makeAccount");
         }
     });
@@ -116,17 +128,17 @@ router.post('/makehairdresser', (req, res) => {
     var myRequest = req.body;
     pool.getConnection((err, conn) => {
         if (err) throw err;
-        const reqCondition = ( (myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined) && (myRequest.license !== undefined));
+        const reqCondition = ((myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined) && (myRequest.license !== undefined));
         if (reqCondition) { //값을 제대로 입력하였을 때
             /**
              * 값을 제대로 입력하였으면 IF문 내부가 실행이 된다. 당연하지 
              */
             const checkAccount = `SELECT * FROM HairClient WHERE CID = '` + myRequest.CID + `'`; //SELECT 문으로 CID 무결성 검사
-            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName,myRequest.CPhoneNum], (err, row) =>{
+            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum], (err, row) => {
                 //console.log(row);
-                if(row.length !== 0)
-                    res.send({"result": "ID가 중복됩니다."})
-                else{
+                if (row.length !== 0)
+                    res.send({ "result": "ID가 중복됩니다." })
+                else {
                     console.log('회원가입 가능');
                     console.log(row);
                     //회원 정보 입력
@@ -135,42 +147,42 @@ router.post('/makehairdresser', (req, res) => {
                         + myRequest.CPassword + `','`
                         + myRequest.CName + `','`
                         + myRequest.CPhoneNum + `', 1)`;
-                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row)=>{
-                        if(err) throw err;
+                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row) => {
+                        if (err) throw err;
                         console.log('미용사 회원가입 완료!');
                     });
                     //미용사정보 (자격증번호, CID) 입력
-                    const makeHairDresserInfo = `INSERT INTO HAIRDresserInfo VALUES('` 
-                        + myRequest.license + `', '` 
+                    const makeHairDresserInfo = `INSERT INTO HAIRDresserInfo VALUES('`
+                        + myRequest.license + `', '`
                         + myRequest.CID + `')`;
                     conn.query(makeHairDresserInfo, [myRequest.license, myRequest.CID], (err, row) => {
-                        if(err) throw err;
+                        if (err) throw err;
                         console.log('미용사 회원가입 완료!');
                     })
-                    res.send({"result" : "회원가입 성공"});
+                    res.send({ "result": "회원가입 성공" });
                 }
             })
         }
-        else{
+        else {
             console.log("이런! 실패했어요 makeHairDresser");
         }
     });
 })
 
-router.post('/makemanager', (req, res)=>{
+router.post('/makemanager', (req, res) => {
     var myRequest = req.body;
-    pool.getConnection((err, conn)=>{
-        if(err) throw err;
-        const reqCondition = ( (myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined) && (myRequest.mBusinessNum !== undefined));
-        if(reqCondition){//값을 제대로 입력 했을 때
+    pool.getConnection((err, conn) => {
+        if (err) throw err;
+        const reqCondition = ((myRequest.CID !== undefined) && (myRequest.CPassword !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined) && (myRequest.mBusinessNum !== undefined));
+        if (reqCondition) {//값을 제대로 입력 했을 때
             /**
              * 값을 제대로 입력했으면 이제부터 데이터 삽입을 해야지?
              */
             const checkAccount = `SELECT * FROM HairClient WHERE CID = '` + myRequest.CID + `'`;
-            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, myRequest.mBusinessNum, myRequest.license, 2], (err, row)=>{
-                if(row.length !== 0)
-                    res.send({"result": "ID가 중복됩니다."})
-                else{
+            conn.query(checkAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, myRequest.mBusinessNum, myRequest.license, 2], (err, row) => {
+                if (row.length !== 0)
+                    res.send({ "result": "ID가 중복됩니다." })
+                else {
                     console.log('회원가입 가능');
                     console.log(row);
                     //회원 정보 입력
@@ -179,23 +191,23 @@ router.post('/makemanager', (req, res)=>{
                         + myRequest.CPassword + `','`
                         + myRequest.CName + `','`
                         + myRequest.CPhoneNum + `', 2)`;
-                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row)=>{
-                        if(err) throw err;
+                    conn.query(makeAccount, [myRequest.CID, myRequest.CPassword, myRequest.CName, myRequest.CPhoneNum, 1], (err, row) => {
+                        if (err) throw err;
                         console.log('사업자 회원가입 완료!');
                     });
-                    const makeManagerInfo = `INSERT INTO businessinfo VALUES('` 
-                        + myRequest.mBusinessNum + `', '` 
-                        + myRequest.CID + `', '` 
+                    const makeManagerInfo = `INSERT INTO businessinfo VALUES('`
+                        + myRequest.mBusinessNum + `', '`
+                        + myRequest.CID + `', '`
                         + myRequest.license + `')`;
                     //사업자 번호 입력
-                    conn.query(makeManagerInfo, [myRequest.mBusinessNum, myRequest.CID, myRequest.license], (err, row)=>{
-                        if(err) throw err;
+                    conn.query(makeManagerInfo, [myRequest.mBusinessNum, myRequest.CID, myRequest.license], (err, row) => {
+                        if (err) throw err;
                     });
-                    res.send({"result" : "회원가입 성공"});
+                    res.send({ "result": "회원가입 성공" });
                 }
             });
         }
-        else{
+        else {
             console.log("이런! 실패했어요 makeManager");
         }
     });
@@ -208,27 +220,27 @@ router.post('/makemanager', (req, res)=>{
  */
 router.post('/findid', (req, res) => {
     var myRequest = req.body;
-    pool.getConnection((err, conn)=>{
-        if(err) throw err;
+    pool.getConnection((err, conn) => {
+        if (err) throw err;
         const reqCondition = ((myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
-        if(reqCondition){ //값을 제대로 입력했을 때
+        if (reqCondition) { //값을 제대로 입력했을 때
             const findID = `SELECT * FROM HairClient WHERE CName = ? AND CPhoneNum = ?`;
-            conn.query(findID, [myRequest.CName, myRequest.CPhoneNum], (err, row)=>{
-                if(row.length !== 0){
+            conn.query(findID, [myRequest.CName, myRequest.CPhoneNum], (err, row) => {
+                if (row.length !== 0) {
                     /**
                      * ID가 존재한다는 뜻
                      */
                     console.log('ID 찾기에 성공했습니다.');
                     console.log(row[0].CID);
-                    res.send({"CID" : row[0].CID});
+                    res.send({ "CID": row[0].CID });
                 }
-                else{
+                else {
                     console.log('ID 찾기에 실패했습니다.');
-                    
+
                 }
             })
         }
-        else{
+        else {
             console.log("이런! 실패했어요 findid");
         }
     });
@@ -238,25 +250,24 @@ router.post('/findid', (req, res) => {
  * 1. 받아온 CID, CName, CPhoneNum값을 SELECT로 조회
  * 2. 결과가 나오면 PW 값을 response를 통해 클라로 던져준다. (이후 재설정 방식으로 변경해야 함)
  */
-router.post('/findPW', (req, res)=>{
+router.post('/findPW', (req, res) => {
     var myRequest = req.body;
-    pool.getConnection((err, conn)=>{
-        if(err) throw err;
+    pool.getConnection((err, conn) => {
+        if (err) throw err;
         const reqCondition = ((myRequest.CID !== undefined) && (myRequest.CName !== undefined) && (myRequest.CPhoneNum !== undefined));
-        if(reqCondition){ //값을 제대로 입력했다면
+        if (reqCondition) { //값을 제대로 입력했다면
             const findPW = `SELECT * FROM HairClient WHERE CID = ? AND CName = ? AND CPhoneNum = ?`
-            conn.query(findPW, [myRequest.CID, myRequest.CName, myRequest.CPhoneNum], (err, row)=>{
-                if(row.length !== 0){
+            conn.query(findPW, [myRequest.CID, myRequest.CName, myRequest.CPhoneNum], (err, row) => {
+                if (row.length !== 0) {
                     console.log('PW 찾기에 성공했습니다.');
-                    res.send({"CPassword" : row[0].CPassword});
+                    res.send({ "CPassword": row[0].CPassword });
                 }
-                else
-                {
+                else {
                     console.log("실패했습니다.");
                 }
             });
         }
-        else{
+        else {
             console.log("이런! 실패했어요 findPW");
         }
     })
@@ -264,16 +275,59 @@ router.post('/findPW', (req, res)=>{
 
 /**
  * 미용실 정보를 DB에 삽입한다.
- * 1. 먼저 SELECT를 통해서 미용실 정보를 받아야 함
- * (이는 로그인한 계정의 CID 값을 받아와야 한다.)
+ * 이미 미용실 정보가 삽입되어 있다면 INSERT가 실행되어선 안된다
+ * 
+ * 완료 버튼을 눌렀을 때
+ * 1. DB에서 SELECT문을 이용하여 해당 CID를 참조하여 미용실 정보를 조회한다.
+ * 2. 미용실 정보가 없으면 INSERT INTO 문을 실행한다.
+ * 3. 미용실 정보가 있으면 ALTER문을 실행하여 정보를 변경한다.
  */
-router.post('/setHairRoomInfo', (req, res)=>{
+router.post('/setHairRoomInfo', (req, res) => {
     var myRequest = req.body;
+    console.log('======setHairRoomInfo========');
     console.log(myRequest);
-    pool.getConnection((err, conn)=>{
-       if(err) throw err; 
-       const reqCondition = ((myRequest.hairRoomName !== undefined) && (myRequest.hairRoomCallNum !== undefined) && (myRequest.hairRoomAddress !== undefined) && (myRequest.hairRoomhairDresserNum !== undefined));
-       console.log(reqCondition);
+    console.log('=============================');
+    pool.getConnection((err, conn) => {
+        if (err) throw err;
+        const reqCondition = ((myRequest.hairRoomName !== undefined) && (myRequest.hairRoomCallNum !== undefined) && (myRequest.hairRoomAddress !== undefined) && (myRequest.dresserNum !== undefined) && (myRequest.CID !== undefined));
+        console.log('reqCondition : ' + reqCondition);
+        if (reqCondition) {
+            console.log('등록이 가능합니다. DB에서 데이터 유무를 확인합니다.');
+            const checkHairRoomInfo = `SELECT * FROM HairRoom WHERE CID = '` + myRequest.CID + `'`;
+            conn.query(checkHairRoomInfo, [myRequest.hairRoomName, myRequest.hairRoomCallNum, myRequest.hairRoomAddress, myRequest.dresserNum, myRequest.CID], (err, row) => {
+                console.log('length : ' + row.length);
+                if (err) console.log("Error! Disconnect");
+                else if (row.length !== 0) {
+                    //이미 데이터가 있기 때문에 변경을 해야 한다.
+                    console.log(row);
+                    console.log('row.length : ' + row.length);
+                    console.log("앗! 삽입 못합니다. 혹시 변경을 해야 하지 않아요?");
+                    res.send({"result":"변경이 필요합니다"});
+                } 
+                else {
+                    //최초 설정 시, DB에 미용실 정보가 삽입된다.
+                    console.log("아무것두 안나오면 데이터를 삽입!");
+                    console.log(row);
+                    const InsertHairRoomInfo = `INSERT INTO HairRoom values('`
+                        + myRequest.hairRoomName + `','`
+                        + myRequest.hairRoomCallNum + `','`
+                        + myRequest.hairRoomAddress + `','`
+                        + myRequest.dresserNum + `','`
+                        + myRequest.CID + `')`;
+                        
+                    conn.query(InsertHairRoomInfo, [myRequest.hairRoomName, myRequest.hairRoomCallNum, myRequest.hairRoomAddress, myRequest.dresserNum, myRequest.CID], (err, row)=>{
+                        if(err) throw err;
+                        else{
+                            res.send({"result":"삽입 완료!"});
+                            console.log('HairRoom 삽입 완료!');
+                        }
+                            
+                    })
+                }
+            })
+        } else {
+            console.log("이런 실패했어요! setHairRoomInfo");
+        }
     });
 })
 

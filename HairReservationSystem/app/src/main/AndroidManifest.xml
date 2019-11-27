@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SetHairRoom"></activity>
+        <activity android:name=".ShowCalendar"></activity>
+        <activity android:name=".SetHairRoom" />
         <activity android:name=".FindAccount" />
         <activity android:name=".ManagerScreen" />
         <activity android:name=".HairDresser" />

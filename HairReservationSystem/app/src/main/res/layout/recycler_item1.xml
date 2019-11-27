@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    >
+
+    <!--이 레이아웃에 있는 내용이 반복되어 recyclerView 출력된다.-->
+    <LinearLayout
+        android:id="@+id/day_layout"
+        android:padding="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/non_select_day"
+        >
+    <TextView
+        android:textSize="8pt"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/week_txt" />
+    <!--날짜를 표시할 TextView-->
+    <TextView
+        android:textSize="10pt"
+        android:paddingLeft="17dp"
+        android:paddingRight="17dp"
+        android:id="@+id/day_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/day_top_line"/>
+    </LinearLayout>
+
+    <!--밑부분에 필요한 데이터를 넣을 공간을 만든다-->
+
+
+</LinearLayout>

@@ -195,19 +195,20 @@ public class HttpConnectionManager {
      * @param hairRoomName
      * @param hairRoomCallNum
      * @param hairRoomAddress
-     * @param hairRoomHairDresserNum
+     * @param dresserNum
      * @param responseHandler
      * @throws JSONException
      * @throws UnsupportedEncodingException
      */
-    public void setHairRoomInfo(String hairRoomName, String hairRoomCallNum, String hairRoomAddress, String hairRoomHairDresserNum, JsonHttpResponseHandler responseHandler)throws JSONException, UnsupportedEncodingException{
+    public void setHairRoomInfo(String hairRoomName, String hairRoomCallNum, String hairRoomAddress, String dresserNum, String myID, JsonHttpResponseHandler responseHandler)throws JSONException, UnsupportedEncodingException{
         String url = baseURL + "setHairRoomInfo";
         try{
             JSONObject jsonParams = new JSONObject();
             jsonParams.put("hairRoomName", hairRoomName);
             jsonParams.put("hairRoomCallNum", hairRoomCallNum);
             jsonParams.put("hairRoomAddress", hairRoomAddress);
-            jsonParams.put("hairRoomhairDresserNum", hairRoomHairDresserNum);
+            jsonParams.put("dresserNum", dresserNum);
+            jsonParams.put("CID", myID);
             ByteArrayEntity entity = new ByteArrayEntity(jsonParams.toString().getBytes("UTF-8"));
             entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             client.post(null, url, entity, "application/json", responseHandler);

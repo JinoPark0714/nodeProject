@@ -27,6 +27,7 @@ import cz.msebera.android.httpclient.Header;
  * 시작하면 로그인을 하거나 ID가 없으면 회원가입을 하는 버튼이 나온다.
  */
 public class Main extends AppCompatActivity {
+
     private HttpConnectionManager hcManager; //통신 시도
     private Button btnLogin, btnMakeAccount, btnFindAccount;
     private EditText CID; //ID 입력
@@ -86,6 +87,11 @@ public class Main extends AppCompatActivity {
 
     /**
      * 버튼을 누를 시, 로그인을 시도한다. (완료)
+     * 이 때 로그인 시
+     * 일반회원은 로그인은 물론 내가 어느 미용실에 예약을 해뒀는지 알 수 있어야 한다.
+     * 미용사는 어느 미용실에 소속되어 있고, 어느 시간대에 누가 예약되어 있는가 알 수 있어야 한다.
+     * 사업자는 최초 로그인 시, 사업장 설정에서 예시정보만 나와야 하고,
+     * 사업장 설정을 끝내고 재 로그인 시, 사업장 설정에서 설정된 정보가 나와야 한다.
      */
     void onClickLogin(){
         btnLogin.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class ManagerScreen extends AppCompatActivity {
     private BackPressCloseHandler backPressCloseHandler;
-    private Button setPlaceBusiness, schedulePlaceBusiness, businessCalendar;
+    private Button setPlaceBusiness, businessCalendar;
     private SetHairRoom setHairRoom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,6 @@ public class ManagerScreen extends AppCompatActivity {
     }
     void setID(){
         setPlaceBusiness = (Button)findViewById(R.id.setPlaceBusiness); //사업장 설정
-        schedulePlaceBusiness = (Button)findViewById(R.id.schedulePlaceBusiness); //스케줄
         businessCalendar = (Button)findViewById(R.id.businessCalendar); //일정관리
     }
 
@@ -34,7 +33,8 @@ public class ManagerScreen extends AppCompatActivity {
         businessCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ShowCalendar.class);
+                startActivity(intent);
             }
         });
     }
