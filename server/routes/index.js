@@ -302,8 +302,41 @@ router.post('/setHairRoomInfo', (req, res) => {
                     console.log(row);
                     console.log('row.length : ' + row.length);
                     console.log("앗! 삽입 못합니다. 혹시 변경을 해야 하지 않아요?");
-                    res.send({"result":"변경이 필요합니다"});
-                } 
+                    res.send({ "result": "변경이 필요합니다" });
+                    const updateHairRoomName = `
+                        UPDATE HairRoom 
+                        SET HairRoomName = '` + myRequest.hairRoomName + `'
+                        WHERE CID = '` + myRequest.CID + `'`;
+                    conn.query(updateHairRoomName, [myRequest.CID], (err, row)=>{
+                        if(err) throw err;
+                        console.log("HairRoomName 변경 완료");
+                    });
+                    const updateHairRoomCallNum = `
+                        UPDATE HairRoom 
+                        SET HairRoomCallNum = '` + myRequest.hairRoomCallNum + `'
+                        WHERE CID = '` + myRequest.CID + `'`;
+                    conn.query(updateHairRoomCallNum, [myRequest.CID], (err, row)=>{
+                        if(err) throw err;
+                        console.log("HairRoomCallNum 변경 완료");
+                    });
+                    const updateHairRoomAddress = `
+                        UPDATE HairRoom 
+                        SET HairRoomAddress = '` + myRequest.hairRoomAddress + `'
+                        WHERE CID = '` + myRequest.CID + `'`;
+                    conn.query(updateHairRoomAddress, [myRequest.CID], (err, row)=>{
+                        if(err) throw err;
+                        console.log("HairRoomAddress 변경 완료");
+                    });
+                    
+                    const updateHairRoomDresserNum = `
+                        UPDATE HairRoom 
+                        SET DresserNum = ` + myRequest.dresserNum + `
+                        WHERE CID = '` + myRequest.CID + `'`;
+                    conn.query(updateHairRoomDresserNum, [myRequest.CID], (err, row)=>{
+                        if(err) throw err;
+                        console.log("DresserNum 변경 완료");
+                    });
+                }
                 else {
                     //최초 설정 시, DB에 미용실 정보가 삽입된다.
                     console.log("아무것두 안나오면 데이터를 삽입!");
@@ -314,20 +347,46 @@ router.post('/setHairRoomInfo', (req, res) => {
                         + myRequest.hairRoomAddress + `','`
                         + myRequest.dresserNum + `','`
                         + myRequest.CID + `')`;
-                        
-                    conn.query(InsertHairRoomInfo, [myRequest.hairRoomName, myRequest.hairRoomCallNum, myRequest.hairRoomAddress, myRequest.dresserNum, myRequest.CID], (err, row)=>{
-                        if(err) throw err;
-                        else{
-                            res.send({"result":"삽입 완료!"});
+
+                    conn.query(InsertHairRoomInfo, [myRequest.hairRoomName, myRequest.hairRoomCallNum, myRequest.hairRoomAddress, myRequest.dresserNum, myRequest.CID], (err, row) => {
+                        if (err) throw err;
+                        else {
+                            res.send({ "result": "삽입 완료!" });
                             console.log('HairRoom 삽입 완료!');
                         }
-                            
                     })
                 }
             })
         } else {
             console.log("이런 실패했어요! setHairRoomInfo");
         }
+    });
+})
+
+
+/**
+ * 사업장 설정에 들어가는 순간 미용실 데이터를 즉시 가져와서 클라이언트에 뿌려준다.
+ */
+router.post('/showHairRoomInfo', (req, res) => {
+    var myRequest = req.body;
+    console.log(myRequest);
+    pool.getConnection((err, conn) => {
+        if (err) throw err;
+        const checkHairRoomInfo = `SELECT * FROM HairRoom WHERE CID = '` + myRequest.CID + `'`;
+        conn.query(checkHairRoomInfo, [myRequest.CID], (err, row) => {
+            if (err) console.log("문제가 발생했어요!");
+            else if (row.length !== 0) {
+                // DB에 데이터가 있다는 뜻
+                console.log(row);
+                res.send(row);
+            }
+            else {
+                // DB에 데이터가 없다는 뜻
+                res.send(row);
+                console.log(row);
+            }
+
+        })
     });
 })
 
